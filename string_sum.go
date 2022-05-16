@@ -51,7 +51,7 @@ func StringSum(input string) (output string, err error) {
 	} else {
 		second, _ = strconv.Atoi(splited[1])
 	}
-	return fmt.Sprintln(first + second), nil
+	return fmt.Sprint(first + second), nil
 }
 
 func NormalString(input string) string {
