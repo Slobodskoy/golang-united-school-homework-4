@@ -40,13 +40,19 @@ func StringSum(input string) (output string, err error) {
 		return "", fmt.Errorf("two operands not found: %w",errorNotTwoOperands)
 	}
 	if strings.HasPrefix(input, "-") {
-		first, _ = strconv.Atoi(splited[0])
+		first, err = strconv.Atoi(splited[0])
+		if err != nil {
+			return "", err
+		}
 		first = -1 * first
 	} else {
 		first, _ = strconv.Atoi(splited[0])
 	}
 	if strings.LastIndex(input, "-") > 0 {
-		second, _ = strconv.Atoi(splited[1])
+		second, err = strconv.Atoi(splited[1])
+		if err != nil {
+			return "", err
+		}
 		second = -1 * second
 	} else {
 		second, _ = strconv.Atoi(splited[1])
