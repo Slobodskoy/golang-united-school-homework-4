@@ -2,6 +2,10 @@ package string_sum
 
 import (
 	"errors"
+	"fmt"
+	"strconv"
+	"strings"
+	"unicode"
 )
 
 //use these errors as appropriate, wrapping them with fmt.Errorf function
@@ -23,5 +27,40 @@ var (
 // Use the errors defined above as described, again wrapping into fmt.Errorf
 
 func StringSum(input string) (output string, err error) {
-	return "", nil
+	var first, second int
+	input = NormalString(input)
+	if input == "" {
+		return "", errorEmptyInput
+	}
+	splited := strings.FieldsFunc(input,
+		func(r rune) bool {
+			return strings.ContainsRune("+-", r)
+		})
+	if len(splited) != 2 {
+		return "", errorNotTwoOperands
+	}
+	if strings.HasPrefix(input, "-") {
+		first, _ = strconv.Atoi(splited[0])
+		first = -1 * first
+	} else {
+		first, _ = strconv.Atoi(splited[0])
+	}
+	if strings.LastIndex(input, "-") > 0 {
+		second, _ = strconv.Atoi(splited[1])
+		second = -1 * second
+	} else {
+		second, _ = strconv.Atoi(splited[1])
+	}
+	return fmt.Sprintln(first + second), nil
+}
+
+func NormalString(input string) string {
+	var normal []rune
+	for _, r := range input {
+		if unicode.IsSpace(r) {
+			continue
+		}
+		normal = append(normal, r)
+	}
+	return string(normal)
 }
