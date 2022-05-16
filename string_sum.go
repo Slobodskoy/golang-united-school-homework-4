@@ -46,7 +46,10 @@ func StringSum(input string) (output string, err error) {
 		}
 		first = -1 * first
 	} else {
-		first, _ = strconv.Atoi(splited[0])
+		first, err = strconv.Atoi(splited[0])
+		if err != nil {
+			return "", fmt.Errorf("letters in first operand: %w", err)
+		}
 	}
 	if strings.LastIndex(input, "-") > 0 {
 		second, err = strconv.Atoi(splited[1])
@@ -55,7 +58,10 @@ func StringSum(input string) (output string, err error) {
 		}
 		second = -1 * second
 	} else {
-		second, _ = strconv.Atoi(splited[1])
+		second, err = strconv.Atoi(splited[1])
+		if err != nil {
+			return "", fmt.Errorf("letters in second operand: %w", err)
+		}
 	}
 	return fmt.Sprint(first + second), nil
 }
