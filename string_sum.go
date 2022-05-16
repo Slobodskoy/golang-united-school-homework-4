@@ -42,7 +42,7 @@ func StringSum(input string) (output string, err error) {
 	if strings.HasPrefix(input, "-") {
 		first, err = strconv.Atoi(splited[0])
 		if err != nil {
-			return "", err
+			return "", fmt.Errorf("letters in first operand: %w", err)
 		}
 		first = -1 * first
 	} else {
@@ -51,7 +51,7 @@ func StringSum(input string) (output string, err error) {
 	if strings.LastIndex(input, "-") > 0 {
 		second, err = strconv.Atoi(splited[1])
 		if err != nil {
-			return "", err
+			return "", fmt.Errorf("letters in second operand: %w", err)
 		}
 		second = -1 * second
 	} else {
