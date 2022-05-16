@@ -30,14 +30,14 @@ func StringSum(input string) (output string, err error) {
 	var first, second int
 	input = NormalString(input)
 	if input == "" {
-		return "", errorEmptyInput
+		return "", fmt.Errorf("input string is empty: %w", errorEmptyInput)
 	}
 	splited := strings.FieldsFunc(input,
 		func(r rune) bool {
 			return strings.ContainsRune("+-", r)
 		})
 	if len(splited) != 2 {
-		return "", errorNotTwoOperands
+		return "", fmt.Errorf("two operands not found: %w",errorNotTwoOperands)
 	}
 	if strings.HasPrefix(input, "-") {
 		first, _ = strconv.Atoi(splited[0])
